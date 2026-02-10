@@ -24,7 +24,7 @@
 ### Встановлення
 
 ```bash
-git clone <цей-репозиторій>
+git clone https://github.com/Zakhar2256/minecraft-Bots
 cd Minecraft-Bots
 npm install
 ```
