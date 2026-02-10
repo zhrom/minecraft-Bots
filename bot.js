@@ -2,7 +2,7 @@ const mineflayer = require('mineflayer');
 const chalk = require('chalk');
 const fs = require('fs');
 const { createWriteStream } = require('fs');
-let rl = null; // Ініціалізується тільки для консольного режиму
+let rl = null; 
 
 const bots = [];
 let stopRequested = false;
@@ -70,7 +70,7 @@ function getUsernameForIndex(baseNamesArr, i) {
 function displayBanner() {
   console.log(chalk.greenBright(`
 =======================================
-       Zakhar's MC Bot (No Proxy)
+                MC Bot 
 =======================================
   Minecraft Multi-Bot direct IP
 =======================================\n`));
