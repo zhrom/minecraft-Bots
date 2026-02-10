@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>MC Bots Controller</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #1e293b, #020617);
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 24px;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 16px;
+      padding: 24px 28px 28px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(14px);
+    }
+    h1 {
+      margin-top: 0;
+      margin-bottom: 4px;
+      font-size: 24px;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h1 span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #38bdf8;
+    }
+    .subtitle {
+      margin-bottom: 18px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px 18px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+    label span {
+      color: #6b7280;
+      font-weight: 400;
+      margin-left: 4px;
+    }
+    input[type="text"],
+    input[type="number"] {
+      padding: 8px 9px;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.45);
+      background: #020617;
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #d1d5db;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      accent-color: #22c55e;
+    }
+    .section-title {
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    button {
+      border: none;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.1s ease;
+    }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(16, 185, 129, 0.45);
+      filter: brightness(1.03);
+    }
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.35);
+      filter: brightness(0.97);
+    }
+    #status {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .hint {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: -2px;
+    }
+    @media (max-width: 640px) {
+      .container {
+        margin: 12px;
+        padding: 16px 16px 20px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Zakhar's MC Bots <span>GUI</span></h1>
+    <div class="subtitle">
+      Заповни параметри нижче та натисни <b>«Запустити ботів»</b>. Логи можна дивитися в цьому вікні (консоль) або у файлі <code>bot_logs.txt</code>.
+    </div>
+
+    <form id="config-form">
+      <div class="section-title">Підключення</div>
+      <div class="grid">
+        <div class="field">
+          <label for="ip">IP / Домен сервера<span>обовʼязково</span></label>
+          <input type="text" id="ip" name="ip" placeholder="Наприклад: play.example.com" required />
+        </div>
+        <div class="field">
+          <label for="port">Порт<span>за замовчуванням 25565</span></label>
+          <input type="number" id="port" name="port" placeholder="25565" />
+        </div>
+        <div class="field">
+          <label for="version">Версія Minecraft<span>порожньо = авто</span></label>
+          <input type="text" id="version" name="version" placeholder="Наприклад: 1.21.4" />
+        </div>
+      </div>
+
+      <div class="section-title">Боти</div>
+      <div class="grid">
+        <div class="field">
+          <label for="count">Кількість ботів</label>
+          <input type="number" id="count" name="count" min="1" value="1" />
+        </div>
+        <div class="field">
+          <label for="connectInterval">Інтервал підключення (сек.)</label>
+          <input type="number" id="connectInterval" name="connectInterval" min="0" value="1" />
+        </div>
+        <div class="field">
+          <label for="customNames">Імена ботів<span>через кому, опц.</span></label>
+          <input type="text" id="customNames" name="customNames" placeholder="Bot1,Bot2,Bot3" />
+        </div>
+      </div>
+      <div class="hint">Якщо імена не задані — будуть випадкові українські ніки.</div>
+
+      <div class="section-title">Повідомлення</div>
+      <div class="grid">
+        <div class="field">
+          <label for="message">Текст повідомлення</label>
+          <input type="text" id="message" name="message" placeholder="Що будуть писати боти" />
+        </div>
+        <div class="field">
+          <label for="messageInterval">Інтервал повідомлень (сек.)</label>
+          <input type="number" id="messageInterval" name="messageInterval" min="1" value="5" />
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: 8px;">
+        <div class="field">
+          <div class="checkbox-row">
+            <input type="checkbox" id="useAutoChat" name="useAutoChat" checked />
+            <label for="useAutoChat">Авто чат (боти самі пишуть повідомлення)</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="checkbox-row">
+            <input type="checkbox" id="useGlobalChat" name="useGlobalChat" checked />
+            <label for="useGlobalChat">Перед повідомленнями писати <code>/g</code></label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="checkbox-row">
+            <input type="checkbox" id="useExclamation" name="useExclamation" checked />
+            <label for="useExclamation">Додати <b>!</b> перед повідомленням</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Реєстрація / Логи</div>
+      <div class="grid">
+        <div class="field">
+          <div class="checkbox-row">
+            <input type="checkbox" id="useRegister" name="useRegister" checked />
+            <label for="useRegister">Використовувати <code>/register</code> при вході</label>
+          </div>
+          <div class="hint">Команда: <code>/register пароль пароль</code></div>
+        </div>
+        <div class="field">
+          <label for="registerPassword">Пароль для <code>/register</code></label>
+          <input type="text" id="registerPassword" name="registerPassword" placeholder="342384248292" />
+        </div>
+        <div class="field">
+          <label for="registerDelaySeconds">Затримка перед <code>/register</code> (сек.)</label>
+          <input type="number" id="registerDelaySeconds" name="registerDelaySeconds" min="0" value="5" />
+          <div class="hint">Через скільки секунд після входу відправляти <code>/register</code>.</div>
+        </div>
+        <div class="field">
+          <label for="postRegisterDelaySeconds">Пауза після реєстрації (сек.)</label>
+          <input type="number" id="postRegisterDelaySeconds" name="postRegisterDelaySeconds" min="0" value="5" />
+          <div class="hint">Скільки секунд чекати після <code>/register</code> перед тим як почати писати в чат.</div>
+        </div>
+        <div class="field">
+          <label for="firstMessageDelaySeconds">Затримка до першого повідомлення (без /register, сек.)</label>
+          <input type="number" id="firstMessageDelaySeconds" name="firstMessageDelaySeconds" min="0" value="5" />
+        </div>
+        <div class="field">
+          <label for="globalChatDelaySeconds">Пауза після <code>/g</code> перед повідомленням (сек.)</label>
+          <input type="number" id="globalChatDelaySeconds" name="globalChatDelaySeconds" min="0" value="1" />
+        </div>
+        <div class="field">
+          <label for="reconnectDelaySeconds">Затримка перед перепідключенням після кіка (сек.)</label>
+          <input type="number" id="reconnectDelaySeconds" name="reconnectDelaySeconds" min="1" value="5" />
+        </div>
+        <div class="field">
+          <div class="checkbox-row">
+            <input type="checkbox" id="verboseLogging" name="verboseLogging" />
+            <label for="verboseLogging">Докладні логи (verbose)</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="checkbox-row">
+            <input type="checkbox" id="muteConsole" name="muteConsole" />
+            <label for="muteConsole">Приглушити спам логів в консолі</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button type="submit">
+            ▶ Запустити ботів
+          </button>
+          <button type="button" id="stop-bots-btn" style="background:linear-gradient(135deg,#ef4444,#b91c1c); box-shadow:0 10px 25px rgba(239,68,68,0.35);">
+            ■ Зупинити всіх ботів
+          </button>
+        </div>
+        <div id="status">Очікування параметрів...</div>
+      </div>
+    </form>
+  </div>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>
+
+
