@@ -278,7 +278,7 @@ async function main() {
           bot.chat(messageText);
           log(`${botName} wrote: ${messageText}`, chalk.cyan);
         } else {
-          log(`Бот ${botName} не знайдено`, chalk.red);
+          log(`Bot ${botName} dont found`, chalk.red);
         }
       }
     });
