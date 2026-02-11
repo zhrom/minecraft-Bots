@@ -171,51 +171,51 @@
   <div class="container">
     <h1>Zakhar's MC Bots <span>GUI</span></h1>
     <div class="subtitle">
-      Заповни параметри нижче та натисни <b>«Запустити ботів»</b>. Логи можна дивитися в цьому вікні (консоль) або у файлі <code>bot_logs.txt</code>.
+      Fill in the parameters below and click <b>«Start bots»</b>. You can view the logs in this window (console) or in a file <code>bot_logs.txt</code>.
     </div>
 
     <form id="config-form">
-      <div class="section-title">Підключення</div>
+      <div class="section-title">Connection</div>
       <div class="grid">
         <div class="field">
-          <label for="ip">IP / Домен сервера<span>обовʼязково</span></label>
-          <input type="text" id="ip" name="ip" placeholder="Наприклад: play.example.com" required />
+          <label for="ip">IP / Server domain<span>necessarily</span></label>
+          <input type="text" id="ip" name="ip" placeholder="for example: play.example.com" required />
         </div>
         <div class="field">
-          <label for="port">Порт<span>за замовчуванням 25565</span></label>
+          <label for="port">Port<span>default 25565</span></label>
           <input type="number" id="port" name="port" placeholder="25565" />
         </div>
         <div class="field">
-          <label for="version">Версія Minecraft<span>порожньо = авто</span></label>
-          <input type="text" id="version" name="version" placeholder="Наприклад: 1.21.4" />
+          <label for="version">Minecraft version<span>empty = auto</span></label>
+          <input type="text" id="version" name="version" placeholder="For Example: 1.21.4" />
         </div>
       </div>
 
-      <div class="section-title">Боти</div>
+      <div class="section-title">Bots</div>
       <div class="grid">
         <div class="field">
-          <label for="count">Кількість ботів</label>
+          <label for="count">Number of bots </label>
           <input type="number" id="count" name="count" min="1" value="1" />
         </div>
         <div class="field">
-          <label for="connectInterval">Інтервал підключення (сек.)</label>
+          <label for="connectInterval">Connection interval (sec.)</label>
           <input type="number" id="connectInterval" name="connectInterval" min="0" value="1" />
         </div>
         <div class="field">
-          <label for="customNames">Імена ботів<span>через кому, опц.</span></label>
+          <label for="customNames">Bot names <span>comma opt.</span></label>
           <input type="text" id="customNames" name="customNames" placeholder="Bot1,Bot2,Bot3" />
         </div>
       </div>
-      <div class="hint">Якщо імена не задані — будуть випадкові українські ніки.</div>
+      <div class="hint">If names are not specified, random nicknames will be used..</div>
 
-      <div class="section-title">Повідомлення</div>
+      <div class="section-title">Message</div>
       <div class="grid">
         <div class="field">
-          <label for="message">Текст повідомлення</label>
-          <input type="text" id="message" name="message" placeholder="Що будуть писати боти" />
+          <label for="message">Message text</label>
+          <input type="text" id="message" name="message" placeholder="What will the bots write" />
         </div>
         <div class="field">
-          <label for="messageInterval">Інтервал повідомлень (сек.)</label>
+          <label for="messageInterval">Message interval (sec.)</label>
           <input type="number" id="messageInterval" name="messageInterval" min="1" value="5" />
         </div>
       </div>
@@ -224,68 +224,68 @@
         <div class="field">
           <div class="checkbox-row">
             <input type="checkbox" id="useAutoChat" name="useAutoChat" checked />
-            <label for="useAutoChat">Авто чат (боти самі пишуть повідомлення)</label>
+            <label for="useAutoChat">Auto chat (bots write messages themselves)</label>
           </div>
         </div>
         <div class="field">
           <div class="checkbox-row">
             <input type="checkbox" id="useGlobalChat" name="useGlobalChat" checked />
-            <label for="useGlobalChat">Перед повідомленнями писати <code>/g</code></label>
+            <label for="useGlobalChat">Before messages, write <code>/g</code></label>
           </div>
         </div>
         <div class="field">
           <div class="checkbox-row">
             <input type="checkbox" id="useExclamation" name="useExclamation" checked />
-            <label for="useExclamation">Додати <b>!</b> перед повідомленням</label>
+            <label for="useExclamation">Add <b>!</b> before the message</label>
           </div>
         </div>
       </div>
 
-      <div class="section-title">Реєстрація / Логи</div>
+      <div class="section-title">Registration / Logs</div>
       <div class="grid">
         <div class="field">
           <div class="checkbox-row">
             <input type="checkbox" id="useRegister" name="useRegister" checked />
-            <label for="useRegister">Використовувати <code>/register</code> при вході</label>
+            <label for="useRegister">Use <code>/register</code> at the entrance</label>
           </div>
-          <div class="hint">Команда: <code>/register пароль пароль</code></div>
+          <div class="hint">Command: <code>/register password password</code></div>
         </div>
         <div class="field">
-          <label for="registerPassword">Пароль для <code>/register</code></label>
+          <label for="registerPassword">Password for <code>/register</code></label>
           <input type="text" id="registerPassword" name="registerPassword" placeholder="342384248292" />
         </div>
         <div class="field">
-          <label for="registerDelaySeconds">Затримка перед <code>/register</code> (сек.)</label>
+          <label for="registerDelaySeconds">Delay before <code>/register</code> (sec.)</label>
           <input type="number" id="registerDelaySeconds" name="registerDelaySeconds" min="0" value="5" />
-          <div class="hint">Через скільки секунд після входу відправляти <code>/register</code>.</div>
+          <div class="hint">How many seconds after register to send <code>/register</code>.</div>
         </div>
         <div class="field">
-          <label for="postRegisterDelaySeconds">Пауза після реєстрації (сек.)</label>
+          <label for="postRegisterDelaySeconds">Pause after registration (sec.)</label>
           <input type="number" id="postRegisterDelaySeconds" name="postRegisterDelaySeconds" min="0" value="5" />
-          <div class="hint">Скільки секунд чекати після <code>/register</code> перед тим як почати писати в чат.</div>
+          <div class="hint">How many seconds to wait after <code>/register</code> before you start writing in the chat.</div>
         </div>
         <div class="field">
-          <label for="firstMessageDelaySeconds">Затримка до першого повідомлення (без /register, сек.)</label>
+          <label for="firstMessageDelaySeconds">Delay until first message (without /register, sec.)</label>
           <input type="number" id="firstMessageDelaySeconds" name="firstMessageDelaySeconds" min="0" value="5" />
         </div>
         <div class="field">
-          <label for="globalChatDelaySeconds">Пауза після <code>/g</code> перед повідомленням (сек.)</label>
+          <label for="globalChatDelaySeconds">Pause after <code>/g</code> before the message (sec.)</label>
           <input type="number" id="globalChatDelaySeconds" name="globalChatDelaySeconds" min="0" value="1" />
         </div>
         <div class="field">
-          <label for="reconnectDelaySeconds">Затримка перед перепідключенням після кіка (сек.)</label>
+          <label for="reconnectDelaySeconds">Delay before reconnecting after kick (sec.)</label>
           <input type="number" id="reconnectDelaySeconds" name="reconnectDelaySeconds" min="1" value="5" />
         </div>
         <div class="field">
           <div class="checkbox-row">
             <input type="checkbox" id="verboseLogging" name="verboseLogging" />
-            <label for="verboseLogging">Докладні логи (verbose)</label>
+            <label for="verboseLogging">Detailed logs (verbose)</label>
           </div>
         </div>
         <div class="field">
           <div class="checkbox-row">
             <input type="checkbox" id="muteConsole" name="muteConsole" />
-            <label for="muteConsole">Приглушити спам логів в консолі</label>
+            <label for="muteConsole">Mute log spam in the console</label>
           </div>
         </div>
       </div>
@@ -293,13 +293,13 @@
       <div class="actions">
         <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
           <button type="submit">
-            ▶ Запустити ботів
+            ▶ Run bots
           </button>
           <button type="button" id="stop-bots-btn" style="background:linear-gradient(135deg,#ef4444,#b91c1c); box-shadow:0 10px 25px rgba(239,68,68,0.35);">
-            ■ Зупинити всіх ботів
+            ■ Stop all bots
           </button>
         </div>
-        <div id="status">Очікування параметрів...</div>
+        <div id="status">Waiting for parameters...</div>
       </div>
     </form>
   </div>
