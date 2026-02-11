@@ -31,34 +31,34 @@ window.addEventListener('DOMContentLoaded', () => {
       reconnectDelaySeconds: parseInt(formData.get('reconnectDelaySeconds') || '5', 10)
     };
 
-    statusEl.textContent = 'Запускаємо ботів...';
+    statusEl.textContent = 'Starting bots...';
 
     try {
       if (window.mcBots && typeof window.mcBots.startBots === 'function') {
         await window.mcBots.startBots(config);
-        statusEl.textContent = 'Боти запускаються. Дивіться лог в консолі застосунку / файлі bot_logs.txt';
+        statusEl.textContent = 'Bots are running. See the log in the application console / bot_logs.txt file';
       } else {
-        statusEl.textContent = 'Помилка: API недоступне.';
+        statusEl.textContent = 'Error: API unavailable.';
       }
     } catch (err) {
       console.error(err);
-      statusEl.textContent = 'Сталася помилка при запуску ботів. Перевірте консоль.';
+      statusEl.textContent = 'An error occurred while starting bots. Check the console.';
     }
   });
 
   if (stopBtn) {
     stopBtn.addEventListener('click', async () => {
-      statusEl.textContent = 'Зупиняємо всіх ботів...';
+      statusEl.textContent = 'Stopping all bots...';
       try {
         if (window.mcBots && typeof window.mcBots.stopBots === 'function') {
           await window.mcBots.stopBots();
-          statusEl.textContent = 'Всі боти зупинені.';
+          statusEl.textContent = 'All bots stopped.';
         } else {
-          statusEl.textContent = 'Помилка: API зупинки недоступне.';
+          statusEl.textContent = 'Error: Stop API is unavailable.';
         }
       } catch (err) {
         console.error(err);
-        statusEl.textContent = 'Сталася помилка при зупинці ботів. Перевірте консоль.';
+        statusEl.textContent = 'An error occurred while stopping bots. Check the console.';
       }
     });
   }
