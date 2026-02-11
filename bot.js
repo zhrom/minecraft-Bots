@@ -139,8 +139,8 @@ function parseAndStartBotsFromConfig(rawConfig) {
   const safeGlobalChatDelay = typeof globalChatDelaySeconds === 'number' ? globalChatDelaySeconds : 1;
   const safeReconnectDelay = typeof reconnectDelaySeconds === 'number' ? reconnectDelaySeconds : 5;
 
-  console.log(chalk.greenBright(`\nЗапускаємо ${count} ботів на сервері ${ip}:${port}, версія: ${version || 'auto'}`));
-  logToFile(`Запускаємо ${count} ботів на сервері ${ip}:${port}, версія: ${version || 'auto'}`);
+  console.log(chalk.greenBright(`\nStarting ${count} bots on server ${ip}:${port}, version: ${version || 'auto'}`));
+  logToFile(`Starting ${count} bots on server ${ip}:${port}, version: ${version || 'auto'}`);
 
   for (let i = 0; i < count; i++) {
     setTimeout(() => {
@@ -172,7 +172,7 @@ function parseAndStartBotsFromConfig(rawConfig) {
 
 function stopAllBots() {
   stopRequested = true;
-  log('Зупинка всіх ботів за запитом користувача', chalk.redBright);
+  log('Stop all bots at user request', chalk.redBright);
   bots.forEach(bot => {
     try {
       bot.end('Stopped by user');
@@ -188,17 +188,17 @@ async function main() {
   let config = {};
 
   if (Object.keys(templates).length > 0) {
-    console.log(chalk.yellow('Збережені шаблони:'));
+    console.log(chalk.yellow('saved templates:'));
     const templateNames = Object.keys(templates);
     templateNames.forEach((name, idx) => {
       console.log(chalk.yellow(`${idx + 1}. ${name}`));
     });
-    const choice = await ask('Виберіть шаблон (номер) або натисніть Enter для нового:');
+    const choice = await ask('Select a template (number) or press Enter for a new one:');
     const selectedIdx = parseInt(choice) - 1;
     if (!isNaN(selectedIdx) && selectedIdx >= 0 && selectedIdx < templateNames.length) {
       const selectedName = templateNames[selectedIdx];
       config = templates[selectedName];
-      console.log(chalk.green(`Завантажено шаблон: ${selectedName}`));
+      console.log(chalk.green(`Downloaded tampate: ${selectedName}`));
     }
   }
 
@@ -276,7 +276,7 @@ async function main() {
         const bot = bots.find(b => b.username === botName);
         if (bot) {
           bot.chat(messageText);
-          log(`${botName} написав: ${messageText}`, chalk.cyan);
+          log(`${botName} wrote: ${messageText}`, chalk.cyan);
         } else {
           log(`Бот ${botName} не знайдено`, chalk.red);
         }
@@ -289,7 +289,7 @@ async function main() {
     const templateName = await ask('Enter template name:');
     templates[templateName] = finalConfig;
     saveTemplates(templates);
-    console.log(chalk.green(`Шаблон "${templateName}" збережено!`));
+    console.log(chalk.green(`Tamplate "${templateName}" saved!`));
   }
 }
 
@@ -313,7 +313,7 @@ function startBot(
   globalChatDelaySeconds,
   reconnectDelaySeconds
 ) {
-  log(`${username} Створюємо бота без проксі (пряме підключення)`, chalk.yellow);
+  log(`${username} Creating a bot without a proxy (direct connection)`, chalk.yellow);
 
   const bot = mineflayer.createBot({
     host: ip,
@@ -326,18 +326,18 @@ function startBot(
   bots.push(bot);
 
   bot.once('spawn', () => {
-    log(`${username} зайшов на сервер і з’явився`, chalk.green);
+    log(`${username} bot joined server`, chalk.green);
   });
 
   bot.on('message', (jsonMsg) => {
     const text = jsonMsg.toString();
 
-    log(`${username} отримав повідомлення: ${text}`, chalk.gray);
+    log(`${username} received a message: ${text}`, chalk.gray);
 
-    const match = text.match(/не\s*правийльно.*?[:\-\s]\s*([A-Za-z0-9]{4,10})/i);
+    const match = text.match(/not\s.*right?[:\-\s]\s*([A-Za-z0-9]{4,10})/i);
     if (match) {
       const code = match[1].trim();
-      log(`${username} КАПЧА → ${code}`, chalk.redBright.bold);
+      log(`${username} КАПТЧА → ${code}`, chalk.redBright.bold);
       setTimeout(() => {
         bot.chat(code);
         log(`${username} відповів: ${code}`, chalk.greenBright.bold);
@@ -350,20 +350,20 @@ function startBot(
   });
 
   bot.once('login', () => {
-    log(`${username} зайшов на сервер`, chalk.green);
+    log(`${username} joined server`, chalk.green);
     const startChatFlow = () => {
       if (!useAutoChat || !message) return;
       if (useGlobalChat) {
         bot.chat('/g');
-        log(`${username} написав: /g`, chalk.cyan);
+        log(`${username} wrote: /g`, chalk.cyan);
       }
       setTimeout(() => {
         const msg = useExclamation ? `!${message}` : message;
         bot.chat(msg);
-        log(`${username} написав: ${msg}`, chalk.cyan);
+        log(`${username} wrote: ${msg}`, chalk.cyan);
         setInterval(() => {
           bot.chat(msg);
-          log(`${username} написав: ${msg}`, chalk.cyan);
+          log(`${username} wrote: ${msg}`, chalk.cyan);
         }, messageInterval * 1000);
       }, globalChatDelaySeconds * 1000);
     };
@@ -371,7 +371,7 @@ function startBot(
     if (useRegister) {
       setTimeout(() => {
         bot.chat(`/register ${registerPassword} ${registerPassword}`);
-        log(`${username} написав: /register ${registerPassword} ${registerPassword}`, chalk.cyan);
+        log(`${username} wrote: /register ${registerPassword} ${registerPassword}`, chalk.cyan);
         if (useAutoChat) {
           setTimeout(startChatFlow, postRegisterDelaySeconds * 1000);
         }
@@ -410,7 +410,7 @@ function startBot(
   bot.on('end', () => {
     const idx = bots.findIndex(b => b.username === username);
     if (idx !== -1) bots.splice(idx, 1);
-    log(`${username} відвалився`, chalk.red);
+    log(`${username} kicked`, chalk.red);
   });
   bot.on('error', err => log(`Помилка ${username}: ${err.message}`, chalk.red));
 
