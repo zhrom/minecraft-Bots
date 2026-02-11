@@ -24,6 +24,6 @@ Graphical interface for launching multiple Minecraft bots (using mineflayer) dir
 ## Installation
 
 ```bash
-git clone https://github.com/Zakhar2256/minecraft-Bots
+git clone https://github.com/zhrom/minecraft-Bots
 cd Minecraft-Bots
 npm install
