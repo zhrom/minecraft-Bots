@@ -1,62 +1,41 @@
-## MC Bots Controller (Electron + mineflayer)
 
-Графічний інтерфейс для запуску декількох Minecraft-ботів (mineflayer) напряму на IP/домен сервера.
-
-### Можливості
-
-- Запуск багатьох ботів одночасно.
-- Кастомні імена або рандомні українські ніки.
-- Авто-реєстрація `/register пароль пароль` з налаштованою затримкою.
-- Авточат:
-  - текст повідомлення,
-  - інтервал між повідомленнями,
-  - опція додавати `/g` перед повідомленнями,
-  - опція додавати `!` перед текстом,
-  - гнучкі затримки між логіном → `/register` → `/g` → першим повідомленням.
-- Налаштовувана затримка перед перепідключенням після кіка.
-- Логи в консоль та файл `bot_logs.txt`.
-- Кнопка **"Зупинити всіх ботів"** в GUI.
-
-### Вимоги
-
-- Node.js 18+ (рекомендовано).
-
-### Встановлення
-
-```bash
+MC Bots Controller (Electron + mineflayer)
+Graphical interface for launching multiple Minecraft bots (using mineflayer) directly to a server IP/domain.
+Features
+Launch multiple bots at the same time
+Custom names or random Ukrainian nicknames
+Auto-registration: /register password password with configurable delay
+Auto-chat:
+Custom message text
+Interval between messages
+Option to add /g before messages (global chat)
+Option to add ! before the text
+Flexible delays: login → /register → /g → first message
+Configurable delay before reconnecting after a kick
+Logs output to console + saved to bot_logs.txt file
+"Stop All Bots" button in the GUI
+Requirements
+Node.js 18 or higher (recommended)
+Installation
 git clone https://github.com/Zakhar2256/minecraft-Bots
 cd Minecraft-Bots
 npm install
-```
-
-Якщо Electron не встановлений:
-
-```bash
+If Electron is not installed:
 npm install electron --save-dev
-```
-
-### Запуск GUI
-
-```bash
+Launching the GUI
 npm start
-```
-
-Відкриється вікно **MC Bots Controller**:
-
-- заповни:
-  - IP/домен сервера та порт,
-  - версію Minecraft (або залиш порожнім для авто),
-  - кількість ботів та інтервал підключення,
-  - повідомлення та інтервал,
-  - опції `/register`, `/g`, `!` перед текстом,
-  - усі затримки (до `/register`, після нього, до першого повідомлення, між `/g` і текстом, перед перепідключенням).
-- натисни **"Запустити ботів"**;
-- щоб повністю вимкнути ботів, натисни **"Зупинити всіх ботів"**.
-
-### Запуск з консолі
-
-```bash
+A window will open: MC Bots Controller
+Fill in:
+Server IP/domain and port
+Minecraft version (leave empty for auto-detect)
+Number of bots and connection interval
+Message text and interval
+Options for /register, /g, ! prefix
+All delays (before /register, after it, before first message, between /g and text, before reconnect)
+Then click "Start Bots"
+To completely stop all bots, click "Stop All Bots"
+Console Mode
 node bot.js
-```
-
-Скрипт задасть питання в консолі (IP, порт, кількість ботів, затримки, тощо), а також може зберігати шаблони конфігів у `templates.json`.
+The script will ask questions in the console (IP, port, number of bots, delays, etc.)
+It can also save configuration templates to templates.json.
+Enjoy using the bot controller! 🚀
