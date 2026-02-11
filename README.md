@@ -27,3 +27,7 @@ Graphical interface for launching multiple Minecraft bots (using mineflayer) dir
 git clone https://github.com/zhrom/minecraft-Bots
 cd Minecraft-Bots
 npm install
+
+#If Electron is not installed:
+```bash
+npm install electron --save-dev
