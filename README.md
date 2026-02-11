@@ -28,6 +28,7 @@ git clone https://github.com/zhrom/minecraft-Bots
 cd Minecraft-Bots
 npm install
 
-#If Electron is not installed:
+#If Electron is not installed
+
 ```bash
 npm install electron --save-dev
