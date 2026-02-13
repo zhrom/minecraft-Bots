@@ -6,8 +6,6 @@ A graphical interface for launching multiple Minecraft bots (mineflayer) directl
 
 ## 🚀 Features
 
-- Launch multiple bots simultaneously  
-- Custom nicknames or random Ukrainian nicknames  
 - Auto-registration using `/register password password` with configurable delay  
 - Auto chat system:
   - Custom message text  
@@ -15,10 +13,6 @@ A graphical interface for launching multiple Minecraft bots (mineflayer) directl
   - Option to add `/g` before messages  
   - Option to add `!` before message text  
   - Flexible delays between login → `/register` → `/g` → first message  
-- Configurable reconnect delay after kick  
-- Logs written to console and `bot_logs.txt` file  
-- "Stop All Bots" button in GUI  
-
 ---
 
 ## 📦 Requirements
