@@ -4,7 +4,7 @@ A graphical interface for launching multiple Minecraft bots (mineflayer) directl
 
 ---
 
-## 🚀 Features
+##  Features
 
 - Auto-registration using `/register password password` with configurable delay  
 - Auto chat system:
@@ -15,13 +15,13 @@ A graphical interface for launching multiple Minecraft bots (mineflayer) directl
   - Flexible delays between login → `/register` → `/g` → first message  
 ---
 
-## 📦 Requirements
+##  Requirements
 
 - Node.js 18+ (recommended)
 
 ---
 
-## ⚙ Installation
+##  Installation
 
 ```bash
 git clone https://github.com/zhrom/minecraft-Bots
@@ -37,7 +37,7 @@ npm install electron --save-dev
 
 ---
 
-## 🖥 Running the GUI
+##  Running the GUI
 
 ```bash
 npm start
@@ -64,7 +64,7 @@ Click **"Stop All Bots"** to fully stop them.
 
 ---
 
-## 💻 Running from Console (CLI Mode)
+##  Running from Console (CLI Mode)
 
 ```bash
 node bot.js
